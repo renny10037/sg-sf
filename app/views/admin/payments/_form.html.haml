@@ -1,0 +1,29 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			= link_to admin_payments_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.wrapper-inputs
+			.card
+				.card-content
+					= simple_form_for [:admin, @payment] do |f|
+						.row
+							= f.input :asignation_id, collection: @total_payment, label_method: :id, value_method: :id, label: false, include_blank:"Select asignation  no payments:#{@no_payments}", input_html: { class: "browser-default" }
+							#asignation{class:"input-field col s12"}
+							= f.input :quantify
+							= f.input :description, input_html: {class: "materialize-textarea"}
+
+							.form-actions.right
+								= f.button :submit, t("keppler.actions.save"), name: '_save'
+								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'
+:javascript
+	
+		$(document).ready(function() {
+		$('#payment_asignation_id').on('click', function() {
+			$.ajax({
+				 url: "#{payments_asignation_path}",
+				 type: "POST",
+				 data: { asignation_id: $(this).val() }
+			});
+		 });
+		 });

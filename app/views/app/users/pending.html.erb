@@ -1,0 +1,94 @@
+<%=render 'app/layouts/navegation_users'%>
+<div class="col-lg-6 col-xs-12" id="section-home2">
+	<div id="home" class="hero hero--scotch2 hero--scotch2 gradient--sunset2">
+	  <div id="mask-home-right2">
+	    <div id="card-login-pending">
+	      <div id="mask-card-login">
+	        <div id="title-card-login">
+	          <span id="title-slice">Welcome:<span id="user-state"><%="¡#{current_user.name}!"%></span> 
+	          </div>
+	        <div id="form-card-login-b">
+	          <div id="item-card-login-e">
+	         		<span id="title-notification">notification</span>
+	         		<div id="notification">
+	      				<span><span id="name-user">¡Hola,<%=" #{current_user.name}! "%></span>Gracias por registrarte en nuestro sistema de freelancer. Por lo momentos no podras acceder a nuestro sistema, debido que tienes un estado como <strong>PENDIENTE</strong>. Te invitamos a esperar otro correo electronico donde el administrador de nuestro sitio te dara los acceso correspondiente. ¡Gracias!</span>
+	         		</div>
+	         	     <%=link_to "Sign out",destroy_user_session_path, class: "button btn btn-lg btn-sesion center-block", style:"text-transform: unset;"%>
+	       		</div>
+	      	</div>
+	    	</div>
+	  	</div>
+  	</div>
+	</div>
+</div>
+
+
+
+
+<style>
+	#card-login-pending{
+		width: 58%;
+    height: 400px;
+    background: white;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.1);
+	}
+	#user-state {
+		font-family: 'Roboto', sans-serif;
+   		letter-spacing: 1px !important;
+    	text-transform: capitalize;
+   		font-size: 19px;
+    	color: #ff5d00;
+    	font-weight: 700;
+    }
+    #name-user{
+    	text-transform: capitalize;
+    	font-weight: bold;
+    }
+    #notification{
+       font-family: 'Roboto', sans-serif;
+       text-align: justify;
+       font-size: 13px;
+       color: #000000cf;
+       line-height: 1.5;
+       text-indent: 20px;
+    }
+   #title-marca {
+      font-family: 'Roboto', sans-serif;
+      color: #ff5d00;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: unset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+   #title-notification{
+   	font-family: 'Roboto', sans-serif;
+    font-size: 19px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #ff5d00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    margin-top: -6px;
+    letter-spacing: 3px;
+   }
+   #slice {
+    width: 100%;
+    height: 20%;
+    background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+
+
+</style>
+
+

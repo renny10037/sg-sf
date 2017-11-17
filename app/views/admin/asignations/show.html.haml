@@ -1,0 +1,52 @@
+= title(t('keppler.titles.show', model: "Asignations"))
+.wrapper
+	.wrapper-body.container
+		.actions
+			-unless (@asignation.payments != [])
+				- if can? :delete, Asignation
+					= link_to admin_asignation_path(@asignation), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+						= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, Asignation
+				= link_to edit_admin_asignation_path(@asignation), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_asignations_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%ul.list
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.id")
+						.display-value.fs-body-1.tc-black-2= @asignation.id.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.order_id")
+						.display-value.fs-body-1.tc-black-2= @asignation.order_id.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.phase_id")
+						.display-value.fs-body-1.tc-black-2= @asignation.phase.name.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start")
+						.display-value.fs-body-1.tc-black-2= @asignation.date_start.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end")
+						.display-value.fs-body-1.tc-black-2= @asignation.date_end.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.payment")
+						.display-value.fs-body-1.tc-black-2= @asignation.payment.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Payment Currency")
+						.display-value.fs-body-1.tc-black-2= @asignation.order.payment_currency.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Employee")
+						.display-value.fs-body-1.tc-black-2= @asignation.user.name.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.description")
+						.display-value.fs-body-1.tc-black-2= @asignation.description.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.observation")
+						.display-value.fs-body-1.tc-black-2= @asignation.observation.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.state_id")
+						.display-value.fs-body-1.tc-black-2= @asignation.state.name.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.admin")
+						.display-value.fs-body-1.tc-black-2= @asignation.admin.to_s.humanize

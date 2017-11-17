@@ -1,0 +1,145 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			= link_to admin_asignations_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+			= link_to request.original_url+'.pdf', class: "btn-floating right btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => "Print" do
+				= material_icon.md_18.description.css_class("md-dark")
+		.card
+			.card-content
+				%ul.list
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Service Order")
+						.display-value.fs-body-1.tc-black-2= @asignation.order_id.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Client")
+						.display-value.fs-body-1.tc-black-2= @asignation.order.name_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Client Identification")
+						.display-value.fs-body-1.tc-black-2= @asignation.order.identification_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Project")
+						.display-value.fs-body-1.tc-black-2= @asignation.order.project.name.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Payment_Currency")
+						.display-value.fs-body-1.tc-black-2= @asignation.order.payment_currency.to_s.humanize
+						-if @asignation.order.payment_currency == "Dolar"
+							-@moneda = "$"
+						-elsif @asignation.order.payment_currency == "Bolivar"
+							-@moneda = "Bs"	
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Price Project")
+						.display-value.fs-body-1.tc-black-2= "#{@asignation.order.price_project.to_s.humanize} #{@moneda}"
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Cost Project ")
+						.display-value.fs-body-1.tc-black-2="#{@asignation.order.cost_project.to_s.humanize} #{@moneda}"
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Date Start")
+						.display-value.fs-body-1.tc-black-2= @asignation.order.date_start_planned.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.Date End")
+						.display-value.fs-body-1.tc-black-2= @asignation.order.date_end_planned.to_s.humanize
+
+						-date_server = Date.parse(Time.now.strftime("%d/%m/%Y"))
+						-date_end = (Date.parse(@asignation.order.date_end_planned.strftime("%d/%m/%Y")))
+						-total_dias = (date_end - date_server).to_i
+						%strong
+							-if (total_dias > 5)
+								="Remaining days:"
+								.color_uno
+									="(#{total_dias})"
+
+							-elsif (total_dias > 0) and (total_dias < 6)
+								="Remaining days:" 
+								.color_dos
+									="(#{total_dias})"
+
+							-elsif (total_dias == 0)
+								="Remaining days:"
+								.color_tres
+									="today is the deadline"
+								
+							-elsif (total_dias < 0)
+								="Remaining days:"
+								.color_cuatro
+									="date ended" 
+						
+					%table.responsive-table.centered
+						%thead
+							%tr
+								%th N ASIG.
+								%th ACTIVITY
+								%th DATE START
+								%th DATE END
+								%th STATE
+								%th PAYMENT
+								%th EMPLOYEE
+								%th RESPONSIBLE
+
+                
+						%tbody
+							-total_activity = 0
+							-activity = 0
+							-payments = 0
+							-@asignation.order.asignations.each do |asignation|
+								-total_activity += 1
+
+								-if(asignation.state.id == 4)
+									-activity += 1
+								-if(asignation.state.id == 3)
+									-total_activity -= 1
+
+								%tr
+									%td
+										= link_to asignation.id, admin_asignation_path(asignation.id)
+									%td
+										=asignation.phase.name
+										-@t_asignations << asignation.id
+									%td
+										=asignation.date_start
+									%td
+										=asignation.date_end
+									%td
+										=asignation.state.name
+									%td
+										="#{asignation.payment} #{@moneda}"
+										-if asignation.state.id != 3
+											-payments += asignation.payment
+											
+									%td
+										=link_to asignation.user.name, admin_user_path(asignation.user.id)
+										-@t_employee << asignation.user.id
+									%td
+										=asignation.admin
+
+							%li.list-row
+								.display-label= t("activerecord.attributes.#{controller_name.singularize}.Total Activities:")
+								.display-value.fs-body-1.tc-black-2
+									%strong
+										%span
+											-if (activity == 0) 
+												.color_tres
+													="(#{activity} / #{total_activity})"
+											-elsif (activity > 0) and (activity < total_activity)
+												.color_dos	
+													="(#{activity} / #{total_activity})"
+											-elsif (activity == total_activity)
+												.color_uno
+													="(#{activity} / #{total_activity})"
+						%table.responsive-table.centered
+							%thead
+								%tr
+									%th 
+									%th ASIGNATIONS
+									%th PAYMENTS
+									%th EMPLOYEE
+							%tbody
+								%tr
+									%th 
+										TOTAL
+									%td 
+										=@t_asignations.uniq.size
+									%td 
+										="#{payments} #{@moneda}"
+									%td 
+										=@t_employee.uniq.size

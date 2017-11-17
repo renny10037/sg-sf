@@ -1,0 +1,133 @@
+<div class="col-lg-6 col-xs-12" id="section-home2">
+   <div id="home" class="hero hero--scotch2 hero--scotch2 gradient--sunset2">
+    <div id="mask-home-right2">
+      <div id="card-login-b">
+        <div id="mask-card-login">
+          <div id="title-card-login">
+            <span id="title-slice">Welcome:<span id="user-state"><%="¡#{current_user.name}!"%></span>
+          </div>
+            <div id="form-card-login-b">
+              <div id="item-card-login-e">
+              <div  class="input-field col s12 string optional" style="text-align: right !important;">
+              <%= link_to destroy_user_session_path do %>
+                 <%= content_tag(:i, "", title: "Exit" ,:class => "fa fa-sign-out fa-2x icon-exit") %>
+               
+              <% end %>
+    
+
+              </div>
+              <span class="title-item">Information Bank</span> 
+              <%= simple_form_for(@bank) do |f| %>
+              <%if (current_user.nationality == "VE") or (current_user.country_residence == "VE")%>
+              <span class="title-item-x">Name Bank</span>
+              <%= f.collection_select :stack_bank_id, StackBank.all, :id, :name, {prompt: "Select a category"}, {class: "form-control", style:"border-radius: 0px !important;"} %>
+              <span class="title-item-x">Type Account</span>
+              <%= f.input :type_account,collection: @type_account,label: false, include_blank: false,input_html: { class: "form-control", style:"border-radius: 0px !important; margin-bottom: -15px;"}%>
+              <span class="t">Cod</span>
+              <span class="title-item-x" style="position: relative; left: 18%;">Digit Account</span>
+              <div class="col-lg-3 col-xs-3" style="padding-right: 0px !important; padding-left: 0px !important; background-color: #fff;">
+                  <%= f.input :cod,:readonly => true, :label => false ,input_html: { class: "form-control",type:"number", style:"background-color: #fff;"}%>
+              </div>
+              <div class="col-lg-9 col-xs-9" style=" padding-right: 0px !important; padding-left: 0px !important; margin-bottom: 12px; ">
+                 <%= f.input :n_account, :autofocus => true, :label => false ,input_html: { class: "form-control",type:"number" }%>
+              </div>
+              <%else%>
+                <span class="title-item-x">Name Bank</span>
+                <%= f.input :stack_bank_id,:readonly => true, label: false, include_blank:"No Disponible", input_html: { class: "form-control", style:"border-radius: 0px !important;" }%>
+                <span class="title-item-x">Type Account</span>
+                <%= f.input :type_account,label: false, :readonly => true, include_blank: false,input_html: { class: "form-control", style:"border-radius: 0px !important; margin-bottom: -15px;"}%>
+                <span class="t">Cod</span>
+                <span class="title-item-x" style="position: relative; left: 18%;">Digit Account</span>
+                <div class="col-lg-3 col-xs-3" style="padding-right: 0px !important; padding-left: 0px !important; background-color: #fff;">
+                    <%= f.input :cod,:readonly => true, :label => false ,input_html: { class: "form-control",type:"number" }%>
+                </div>
+                <div class="col-lg-9 col-xs-9" style=" padding-right: 0px !important; padding-left: 0px !important; margin-bottom: 12px; ">
+                   <%= f.input :n_account, :readonly => true, :label => false ,input_html: { class: "form-control",type:"number" }%>
+                </div>
+               <%end%>
+                <span class="title-item-z">Link PayPal me</span>
+                 <%= f.input :email_paypal, :autofocus => true,class: "validate #{'invalid' if flash[:alert]}", :label => false ,input_html: { class: "form-control", style:"margin-top: 5px;" }%>
+               
+                    <%= f.button :submit, "save", :class => 'btn btn-lg btn-sesion-e center-block'  %>
+             
+                    <%= f.button :submit, "save", :class => 'btn btn-lg btn-sesion-e center-block'  %>
+                
+            
+           </div>
+       
+            
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style type="text/css">
+
+ .t{
+      position: relative;
+    top: 29px;
+ }
+  #cod{
+    width: 100%;
+    /* background: red; */
+    height: 34px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+  }
+
+  .title-item-z {
+    color: black;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  
+
+</style>
+<script type="text/javascript">
+
+  $(document).ready(function() {
+          $('#bank_stack_bank_id').on('change', function() {
+              // alert('hola');
+              $.ajax({
+                 url: "<%= banks_name_path %>",
+                 type: "POST",
+                 data: { stack_bank_id: $(this).val() }
+              });
+           });
+       });
+
+  </script>
+
+
+<style>
+ 
+  #user-state {
+    font-family: 'Roboto', sans-serif;
+      letter-spacing: 1px !important;
+      text-transform: capitalize;
+      font-size: 19px;
+      color: #ff5d00;
+      font-weight: 700;
+    }
+  /* .form-control:focus {
+     border-color: transparent !important;
+     box-shadow: none !important;
+   }*/
+
+
+   a:hover, a:focus {
+    color: #BF5010 !important;
+    text-decoration: underline;
+}
+
+
+</style>
+
+

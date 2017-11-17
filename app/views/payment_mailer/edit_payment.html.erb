@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>correo</title>
+</head>
+<body>
+	<strong>Estimado: </strong><%="#{@payment.asignation.user.name} #{@payment.asignation.user.last_name} el pago de referencia N: #{@payment.id} fue actualizado con las siguientes caracteristicas:" %></br>
+	<strong>N: Referencia: </strong><%=@payment.id%></br>
+	<%if @payment.asignation.order.payment_currency == "Dolar"%>
+		<%@moneda = "$"%>
+	<%elsif @payment.asignation.order.payment_currency == "Bolivar"%>
+		<%@moneda = "Bs"%>
+	<%end%>
+	<strong>Quantify Payment: </strong><%=@payment.quantify%> <%=@moneda%></br>
+	<strong>Description: </strong><%=@payment.description%></br>
+</body>
+</html>

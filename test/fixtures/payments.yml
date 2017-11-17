@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  asignation_id: MyString
+  quantify: 1.5
+  description: MyText
+  user_id: MyString
+
+two:
+  asignation_id: MyString
+  quantify: 1.5
+  description: MyText
+  user_id: MyString

@@ -1,0 +1,30 @@
+.title-item{
+   font-size: 14px;
+   text-transform: uppercase;
+   font-weight: bolder;
+}
+
+.title-order{
+   font-size: 20px;
+   text-transform: uppercase;
+   font-weight: bolder;
+}
+
+
+#experience{
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: justify;
+  line-height: 2;
+}
+
+.keppler-modal{
+background: #484848;
+}
+
+@media #{$small-and-down} {
+    .keppler-modal{
+      background: #3b46d2
+  }
+  }

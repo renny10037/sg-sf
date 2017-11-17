@@ -1,0 +1,69 @@
+%tr{ id: "row-#{payment.id}" }
+	/ - if can? :destroy_multiple, Payment
+	/ 	%td.item-check{style:"width: 10%"}
+	/ 		= link_to "", admin_payment_path(payment), remote: true, class: "show-row"
+	/ 		%input{ type:"checkbox", class: "filled-in", id: "checkbox-#{payment.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{payment.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
+	/ 		%label{ for: "checkbox-#{payment.id}" }
+	%td{style:"width: 1%"}
+	%td{style:"width: 20%"}
+		= link_to "", admin_payment_path(payment, search: @query), remote: true, class: "show-row"
+		%span
+			= payment.asignation_id
+	%td{style:"width: 20%"}
+		= link_to "", admin_payment_path(payment, search: @query), remote: true, class: "show-row"
+		%span
+			= payment.quantify
+	%td{style:"width: 20%"}
+		= link_to "", admin_payment_path(payment, search: @query), remote: true, class: "show-row"
+		%span
+			= payment.asignation.order.payment_currency
+	
+	%td{style:"width: 40%"}
+		= link_to "", admin_payment_path(payment, search: @query), remote: true, class: "show-row"
+		-t = payment.asignation.payments.inject(0) {|i,p| p.quantify + i}
+		-pr = ((t*100)/payment.asignation.payment)	
+		
+		%strong
+			%span
+				-if (pr < 100) and (payment.asignation.state.id == 4)
+					.color_tres
+						="Completed Activity  Incomplete payment:#{pr.to_i}%"
+				-elsif (pr > 0) and (pr < 100) 
+					.color_dos	
+						="paid total:#{pr.to_i}%"
+				-elsif (pr == 100.0)
+					.color_uno
+						="paid total:#{pr.to_i}%"
+
+	%td{style:"width: 20%"}
+		= link_to "", admin_payment_path(payment, search: @query), remote: true, class: "show-row"
+		%span
+			%strong
+				-if (payment.asignation.state.id == 1)  
+					.color_uno
+						="State:#{payment.asignation.state.name}"
+
+				-elsif (payment.asignation.state.id == 2)  
+					.color_dos
+						="State:#{payment.asignation.state.name}"
+
+				-elsif (payment.asignation.state.id == 3)  
+					.color_tres
+						="State:#{payment.asignation.state.name}"
+					
+				-elsif (payment.asignation.state.id == 4)  
+					.color_cuatro
+						="State:#{payment.asignation.state.name}"
+				-else (payment.asignation.state.id > 4)  
+					="State:#{payment.asignation.state.name}"
+				
+	%td{style:"width: 5%"}
+		= link_to admin_payment_history_path(payment), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.history.css_class("md-dark")
+
+	%td{style:"width: 5%"}
+		= link_to admin_payment_inspect_path(payment), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.search.css_class("md-dark")
+	%td{style:"width: 5%"}
+		= link_to admin_payment_path(payment), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.more_horiz.css_class("md-dark")

@@ -1,0 +1,263 @@
+<div id="header">
+ <div class="caja">
+  <%=image_tag "app/slice-freelancer-white",class:"img-responsive",class:"control"%>
+ </div>
+</div>
+<div id="sidebar"><a href="#" class="visible-phone" class="open"><i class="icon icon-home"></i> Dashboard</a>
+  <ul>
+    <li class="active-fail">
+        <%= link_to app_employees_index_path do %>
+           <%= content_tag(:i, " ", :class => "icon icon-home") %>
+           <%= content_tag(:span, "Home") %>
+        <% end %>
+    </li>
+    <li class="active-fail">
+        <%= link_to app_employees_asignation_path do %>
+           <%= content_tag(:i, " ", :class => "icon fa fa-check") %>
+           <%= content_tag(:span, "Asignation") %>
+        <% end %>
+    </li>
+    <li class="active-fail">
+        <%= link_to app_employees_payment_path do %>
+           <%= content_tag(:i, " ", :class => "icon icon-money") %>
+           <%= content_tag(:span, "Payment") %>
+        <% end %>
+    </li>
+    <li class="active-fail">
+         <%= link_to app_employees_report_path do %>
+           <%= content_tag(:i, " ", :class => "icon icon-file") %>
+           <%= content_tag(:span, "Report") %>
+        <% end %>
+    </li>
+    <li class="submenu"> <a href="#"><i class="icon fa fa-cog"></i> <span>Settings</span></a>
+      <ul>
+        <li><span><%=link_to "Edit Profile",edit_user_registration_path(current_user)%></span></li>
+        <li><span><%=link_to "Edit Bank",edit_bank_path(current_user.bank)%></span></li>   
+        <li><span><%=link_to "Edit Experience",edit_experience_path(current_user.experience)%></span></li> 
+      </ul>
+    </li>
+    
+  </ul>
+</div>
+<div id="user-nav">
+ <span class="text" id="user-item-name">Welcome:<%=" #{current_user.name} #{current_user.last_name}"%></span>
+ 
+  <span><%= link_to destroy_user_session_path do %>
+      <%= content_tag(:i, "" ,:class => "fa fa-sign-out fa-2x icon-exit-f") %>
+    <% end %></span> 
+
+     
+</div>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="index" title="Home" class="tip-bottom"><i class="icon-home"></i>Home</a> <a href="#" class="current"><%=action_name%></a> </div>
+  </div>
+
+
+
+<style type="text/css">
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none !important;
+  background-color: none !important;
+}
+
+
+.nav-text, .dropdown-toggle {
+    color: #ffffff !important;
+    font: menu;
+}
+
+
+.caja{
+    width: 220px;
+    height: 100%;
+/*    background: rgb(196, 0, 245);*/
+  }
+
+@media (min-width: 0px) and (max-width: 767px){
+   .caja{
+    width: 100%;
+    height: 100%;
+   }
+
+   img.control{
+      height: 70% !important;
+      width: 27% !important;
+   }
+
+   #user-nav {
+    position: relative !important;
+    right: 0px !important; 
+    top: 0px !important;
+    z-index: 20 !important;
+    margin: 0 !important;
+    text-align: right !important;
+  
+   }
+   #user-item-name{
+    margin-right: 25px !important;
+   }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+
+  .caja {
+    width: 80%;
+    height: 100%;
+   }
+   img.control{
+      height: 70% !important;
+      width: 22% !important;
+   }
+   #user-nav {
+    top: 27px !important;
+    }
+}
+ 
+
+#use-ico{
+  font-size: 15px;
+    padding-left: 12px;
+    color: white;
+    opacity: 1;
+}
+#user-item-name{
+      color: white;
+    text-transform: capitalize;
+    font-size: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+#user-nav {
+    position: absolute;
+    right: 25px;
+    top: 6px;
+    z-index: 20;
+    margin: 0;
+}
+
+img.control {
+    display: block;
+    width: 42%;
+    margin: 0;
+    padding: 0;
+    height: 66%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#sidebar > ul li ul li a:hover, #sidebar > ul li ul li.active a {
+    background-color: #757575 !important;
+    color: #fff !important;
+}
+
+.icon-exit-f{
+   color: #eeeeee !important;
+}
+
+</style>
+
+
+<script>
+
+
+
+$(document).ready(function(){
+
+  
+  
+  // === Sidebar navigation === //
+  
+  $('.submenu > a').click(function(e)
+  {
+    e.preventDefault();
+    var submenu = $(this).siblings('ul');
+    var li = $(this).parents('li');
+    var submenus = $('#sidebar li.submenu ul');
+    var submenus_parents = $('#sidebar li.submenu');
+    if(li.hasClass('open'))
+    {
+      if(($(window).width() > 768) || ($(window).width() < 479)) {
+        submenu.slideUp();
+      } else {
+        submenu.fadeOut(250);
+      }
+      li.removeClass('open');
+    } else 
+    {
+      if(($(window).width() > 768) || ($(window).width() < 479)) {
+        submenus.slideUp();     
+        submenu.slideDown();
+      } else {
+        submenus.fadeOut(250);      
+        submenu.fadeIn(250);
+      }
+      submenus_parents.removeClass('open');   
+      li.addClass('open');  
+    }
+  });
+  
+  var ul = $('#sidebar > ul');
+  
+  $('#sidebar > a').click(function(e)
+  {
+    e.preventDefault();
+    var sidebar = $('#sidebar');
+    if(sidebar.hasClass('open'))
+    {
+      sidebar.removeClass('open');
+      ul.slideUp(250);
+    } else 
+    {
+      sidebar.addClass('open');
+      ul.slideDown(250);
+    }
+  });
+  
+  // === Resize window related === //
+  $(window).resize(function()
+  {
+    if($(window).width() > 479)
+    {
+      ul.css({'display':'block'});  
+      $('#content-header .btn-group').css({width:'auto'});    
+    }
+    if($(window).width() < 479)
+    {
+      ul.css({'display':'none'});
+      fix_position();
+    }
+    if($(window).width() > 768)
+    {
+      $('#user-nav > ul').css({width:'auto',margin:'0'});
+            $('#content-header .btn-group').css({width:'auto'});
+    }
+  });
+  
+  if($(window).width() < 468)
+  {
+    ul.css({'display':'none'});
+    fix_position();
+  }
+  
+  if($(window).width() > 479)
+  {
+     $('#content-header .btn-group').css({width:'auto'});
+    ul.css({'display':'block'});
+  }
+  
+});
+
+
+
+</script>
+

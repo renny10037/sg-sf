@@ -1,0 +1,48 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			= link_to admin_asignations_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				
+				=link_to "Asignation N:#{@asignation.id}", admin_asignation_path(@asignation.id)
+				%table.responsive-table.centered
+					%thead
+						%tr
+							%th N EDIT.
+							%th ACTIVITY
+							%th DATE START
+							%th DATE END
+							%th STATE
+							%th PAYMENT
+							%th EMPLOYEE
+							%th RESPONSIBLE
+							/ %th Description
+							/ %th Observation
+					%tbody
+						-a = -1
+						-@asignation.history_asignations.each do |history_asignation|
+							-a = a+1
+							%tr
+								%td 
+									=a
+								%td 
+									=history_asignation.phase.name
+						
+								%td 
+									=history_asignation.date_start
+								%td 
+									=history_asignation.date_end
+								%td 
+									=history_asignation.state.name
+								%td 
+									="#{history_asignation.payment} #{@moneda}"
+								%td 
+									=link_to history_asignation.user.name, admin_user_path(history_asignation.user.id)
+								%td 
+									=history_asignation.admin
+								/ %td 
+								/ 	=history_asignation.description
+								/ %td 
+								/ 	=history_asignation.observation

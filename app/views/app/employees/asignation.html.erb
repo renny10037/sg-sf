@@ -1,0 +1,50 @@
+<%=render "app/layouts/navegation_navbar"%>
+<%=render "app/employees/partials/table"%>
+ <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;">
+         <h4>ASIGNATIONS</h4>
+         <table class="table table-bordered table-responsive table-striped table-condensed" id="tablet">
+          <div class="contenedor">
+                <thead>
+                  <tr>
+                    <th>N ASIGNATION</th>
+                    <th>CLIENT</th>
+                    <th>PROJECT</th>
+                    <th>ACTIVITY</th>
+                    <th>DATE START</th>
+                    <th>DATE END</th>
+                    <th>PAYMENT</th>
+                    <th>STATE</th>
+                    <th>MAS</th>
+                      
+
+                      
+                  </tr>
+                </thead>
+                <%@asignations.sort.reverse.each do |asignation|%>
+                  <%if asignation.user.id.to_i == current_user.id.to_i %>
+                    <%if (asignation.state_id == '1') or (asignation.state_id == '2')%>
+                      <tbody>
+                        <tr style="text-align: center;">
+                          <td><%=asignation.id%></td>
+                          <td><%=asignation.order.name_client%></td>
+                          <td><%=asignation.phase.name%></td>
+                          <td><%=asignation.order.project.name%></td>
+                          <td><%=asignation.date_start%></td>
+                          <td><%=asignation.date_end%></td>
+                          <td><%=asignation.payment%></td>
+                          <td><%=asignation.state.name%></td>
+                          <td><%=link_to "...",app_employees_partial_asignation_path(asignation.id), remote: true%></td>
+                        </tr>
+                      </tbody>
+                    <%end%>
+                  <%end%>  
+                <%end%>
+              </div>
+            </table> 
+            <div id="partial_asignation"></div>
+        </div>
+      </div>
+    </div>
+

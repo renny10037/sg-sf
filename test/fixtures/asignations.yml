@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_id: MyString
+  phase_id: MyString
+  date_start: 2017-09-07
+  date_end: 2017-09-07
+  payment: 1.5
+  user_id: MyString
+  description: MyText
+  observation: MyText
+  state_id: MyString
+  admin: MyString
+
+two:
+  order_id: MyString
+  phase_id: MyString
+  date_start: 2017-09-07
+  date_end: 2017-09-07
+  payment: 1.5
+  user_id: MyString
+  description: MyText
+  observation: MyText
+  state_id: MyString
+  admin: MyString

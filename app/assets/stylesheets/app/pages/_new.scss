@@ -1,0 +1,374 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#section-home{
+  height: 100%;
+  padding-right: 0 !important; 
+  padding-left: 0 !important ; 
+}
+
+#section-home2{
+  height: 100%;
+  
+  padding-right: 0 !important; 
+  padding-left: 0 !important ; 
+}
+
+
+
+#home{
+  width: 100%;
+  height: 100%;
+  position: relative;
+} 
+
+#mask-home-left{
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	position: relative;
+}
+
+#mask-home-right{
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.25);
+   position: relative;
+
+}
+
+#logo-home-slice{
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	bottom: 0px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#logo-home-freelance{
+	width: 100%;
+    height: 200px;
+/*     background: #e65124; */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.button_sesion{
+  margin-top: 30px;
+  width: 50%;
+  heifht: 100px;
+  position: relative;
+  top: 25%;
+  left: 25%;
+}
+
+#card-login{
+  width: 55%;
+  height: 450px;
+  background: rgb(255, 255, 255);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+#card-login-b{
+  width: 58%;
+  height: 560px;
+  background: rgb(255, 255, 255);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+#card-registration{
+  width: 80%;
+  height: 750px;
+  background: rgb(255, 255, 255);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.title-item{
+    color: black;
+  FONT-WEIGHT: BOLD;
+  text-transform: uppercase;
+  display: FLEX;
+  ALIGN-ITEMS: center;
+  JUSTIFY-CONTENT: center;
+  letter-spacing: 3px;
+}
+
+.title-item-b{
+    color: black;
+  FONT-WEIGHT: BOLD;
+  text-transform: uppercase;
+  display: FLEX;
+  ALIGN-ITEMS: center;
+  JUSTIFY-CONTENT: center;
+  letter-spacing: 3px;
+  margin-bottom: 15px !important;
+}
+
+.title-item-a
+{
+      color: black;
+    FONT-WEIGHT: BOLD;
+    text-transform: capitalize;
+    display: FLEX;
+    ALIGN-ITEMS: center;
+    /* JUSTIFY-CONTENT: center; */
+    /* letter-spacing: 3px; */
+    text-align: left;
+}
+
+.title-item-x
+{
+      color: black;
+    FONT-WEIGHT: BOLD;
+    text-transform: capitalize;
+    display: FLEX;
+    ALIGN-ITEMS: center;
+    text-align: left;
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+
+
+.title-item-registration{
+    color: black;
+  FONT-WEIGHT: BOLD;
+  display: FLEX;
+  ALIGN-ITEMS: centerleft;
+  JUSTIFY-CONTENT: left;
+  letter-spacing: 1px;
+}
+.recoverable{
+      display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: black;
+    font-size: 13px;
+}
+#mask-card-login{
+	width: 100%;
+	height: 100%;
+  position:relative;
+   /*  background: rgba(0, 0, 0, 0.05); */
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.9);
+}
+
+#form-card-login{
+   width: 100%;
+   height: 350px;
+   padding: 40px;
+   position:relative;
+}
+
+
+#form-card-login-b{
+   width: 100%;
+   height: 450px;
+   padding: 40px;
+   position:relative;
+}
+
+
+
+
+#form-card-registration{
+   width: 100%;
+   height: 350px;
+   padding: 20px;
+}
+
+.btn-sesion{
+  background: #47535b;
+  color: white;
+  text-transform: uppercase;
+  font-size: 16px !important;
+  border-radius: 0px !important;
+  margin-top: 15px;
+  width: 50%;
+}
+
+.boton{
+  position: absolute;
+  height: 50% !important;
+  top: 40%;
+  transform: translateY(-40%);
+}
+
+.btn-sesion-e{
+    bottom: 0;
+    position: absolute;
+     background: #47535b;
+  color: white;
+  text-transform: uppercase;
+  font-size: 16px !important;
+  border-radius: 0px !important;
+  width: 50%;
+  left: 50%;
+    transform: translateX(-50%);
+}
+#item-card-login{
+  width: 100%;
+  height: 100%;
+  padding-top: 30px;
+  position: relative;
+}
+
+#item-card-login-e{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.hola{
+      position: absolute;
+    /* background: grey; */
+    height: 100%;
+}
+#logo-slice-group{
+	height: 100%;
+	width: 50%;
+	background-image:url(logo-slice.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 120px;
+	left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+#logo-slice-freelance{
+	height: 100%;
+    width: 80%;
+	background-image:url(slice_freelancer.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+  .hero
+  {
+  -ms-flex-align:stretch;
+  align-items:stretch;
+  background-color:#fff;
+  display:-ms-flexbox;
+  display:flex;
+  -ms-flex-direction:column;
+  flex-direction:column;
+  -ms-flex-pack:justify;
+  justify-content:space-between
+  }
+
+ .hero--scotch
+ {
+  position:relative;
+  overflow:hidden;
+  height: 100%;
+ }
+
+.hero--scotch:before{
+  background-position:50%;
+  background-size:750px;
+  background-image:url(icon-background.png);
+  position:absolute;
+  top:0;
+  left:0;
+  height:400%;
+  width:100%;
+  display:block;
+  z-index:0;
+  content:"";
+  opacity: 0.3;
+  pointer-events:none
+}
+
+
+.hero--scotch2
+ {
+  position:relative;
+  overflow:hidden;
+  height: 100%;
+ }
+
+.hero--scotch2:before{
+  background-position:50%;
+  background-size:750px;
+  background-image:url(icon-background.png);
+  position:absolute;
+  top:0;
+  left:0;
+  height:400%;
+  width:100%;
+  display:block;
+  z-index:0;
+  content:"";
+  opacity: 0.3;
+  pointer-events:none
+}
+
+
+.input-sesion{
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.section-item{
+}
+
+.gradient--sunset {
+  
+    background-color: #47535b;
+    border-right: 2px dashed white;
+}
+
+
+.gradient--sunset2 {
+  
+    background-color: #BF5010;
+ 
+}
+
+#mask-home-right2 {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.49);
+    position: relative;
+}
+
+
+@media (max-width: 480px) {
+  #card-login {
+  width: 80%;
+}
+  }
+
+
+.btn:hover, .submit:hover, .button-xs:hover, .btn:focus, .submit:focus, .button-xs:focus, .btn.focus, .focus.submit, .focus.button-xs {
+    color: #FFF !important;
+    text-decoration: none;
+}

@@ -1,0 +1,18 @@
+@media only screen and (min-width: 0) {
+  html {
+    font-size: 14px !important;
+  }
+}
+@media only screen and (min-width: 992px) {
+  html {
+    font-size: 14px !important;
+  }
+  .container-md {
+    width: 85%;
+    }
+}
+@media only screen and (min-width: 1200px) {
+  html {
+    font-size: 15px !important;
+  }
+}

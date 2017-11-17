@@ -1,0 +1,61 @@
+<%=render 'app/layouts/navegation_users'%>
+<div class="col-lg-6 col-xs-12" id="section-home2">
+    <div id="home" class="hero hero--scotch2 hero--scotch2 gradient--sunset2">
+    <div id="mask-home-right2">
+      <div id="card-login">
+        <div id="mask-card-login">
+          <div id="title-card-login">
+            <span id="title-slice">Welcome:<span id="user-state"><%="¡#{current_user.name}!"%></span>   
+          </div>
+          <div id="form-card-login">
+            <div id="item-card-login-e">
+              <div  class="input-field col s12 string optional" style="text-align: right !important;">
+                <%= link_to destroy_user_session_path do %>
+                 <%= content_tag(:i, "", title: "Exit" ,:class => "fa fa-sign-out fa-2x icon-exit") %>
+               
+              <% end %>
+
+              <span class="title-item">Experiencia</span>
+
+              <%= simple_form_for(@experience) do |f| %>
+                <%= f.input :description, :label => false ,input_html: { class: "form-control boton" } %>
+
+    <%= f.button :submit, "Guardar", :class => 'btn btn-lg btn-sesion-e center-block'  %>
+  </div>
+                
+
+            
+                  
+              
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style type="text/css">
+  
+
+ 
+  #user-state {
+    font-family: 'Roboto', sans-serif;
+      letter-spacing: 1px !important;
+      text-transform: capitalize;
+      font-size: 19px;
+      color: #ff5d00;
+      font-weight: 700;
+    }
+    a:hover, a:focus {
+    color: #BF5010 !important;
+    text-decoration: underline;
+}
+   
+  
+</style>
+
+
+

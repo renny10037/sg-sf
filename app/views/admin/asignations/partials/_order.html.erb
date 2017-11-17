@@ -1,0 +1,112 @@
+<div id ="order2">
+	<%if order.percentage_cost == nil%>
+	</br>
+	</br>
+	</br>
+	</br>
+		<%="Estimado usuario debe asignar un Porcentaje a la orden para continuar con la asignation"%>
+		<%=link_to "Asignar",new_admin_percentage_cost_path%>
+	<%else%>
+		<href="#modal1"></a>
+		<div id="modal1" class="modal" style="height: 250px; padding: 20px; width: 65%;">
+			<div class="modal-content">
+				<span class="title-order"><%="Order Service N: #{order.id}"%></span>
+				<%if order.payment_currency == "Bolivar"%>
+					<%@moneda = "Bs"%>
+				<%elsif order.payment_currency == "Dolar"%>
+					<%@moneda = "$"%>
+				<%end%>
+				<table class="responsive-table centered">
+					<thead>
+						 <tr class="title-item">	
+								<th>Client</th>
+								<th>Identifation</th>
+								<th>Project</th>
+								<th>Date Start</th>
+								<th>Date End</th>
+								<th>Price</th>
+								<th>Cost</th>
+								<th>% Payment</th>
+						 </tr>
+					</thead>
+					  <tbody>
+						<tr>
+							<td><%=order.name_client%></td>
+							<td><%=order.identification_client%></td>
+							<td><%=order.project.name%></td>
+							<td><%=order.date_start_planned%></td>
+							<td><%=order.date_end_planned%></td>
+							<td><%="#{order.price_project} #{@moneda}"%></td>
+							<td><%="#{order.cost_project} #{@moneda}"%></td>
+							<td><%="#{order.percentage_cost.quantify}%"%></td>
+							</tr>
+					  </tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action modal-close waves-light btn modal-trigger keppler-modal" href="#modal1">Acept</a>
+			</div>
+		</div>
+
+		 <!-- Modal Trigger -->
+		<a href="#modal2"></a>
+
+		<!-- Modal Structure -->
+		<div id="modal2" class="modal bottom-sheet" style="padding: 20px;">
+			<div class="modal-content  modal-fixed-footer">
+				<span class="title-order">Order N° :<%=order.id%></span>
+					<%if order.asignations == []%>
+						<%="Esta Orden no posee actualmente  asignaciones"%>
+						<%else%>
+						<table class="responsive-table highlight centered">
+							<thead>
+									<tr class="title-item">
+										<th>N° ASIG.</th>
+										<th>ACTIVITY</th>
+										<th>COST</th>
+										<th>PRICE</th>
+										<th>DATE START</th>
+										<th>DATE END</th>
+										<th>STATE</th>
+										<th>EMPLOYEE</th>
+										<th>TOTAL TO PAY</th>
+										<th>TOTAL PAID</th>
+										
+										</tr>
+								</thead>
+								<tbody>
+								<%a = 0%>
+								<%order.asignations.each do |asignation|%>
+									<tr>
+										<td><%=link_to asignation.id, admin_asignation_path(asignation.id)%></td>
+										<td><%=asignation.phase.name%></td>
+										<%if order.payment_currency == "Bolivar"%>
+											<td><%=" #{asignation.phase.task.cost_bolivar} Bs"%></td>
+											<td><%="#{asignation.phase.task.price_bolivar} Bs"%></td>
+										<%else%>
+											<td><%="#{asignation.phase.task.cost_dolar} $"%></td>
+											<td><%="#{asignation.phase.task.price_dolar} $"%></td>
+										<%end%>
+										<td><%=asignation.date_start%></td>
+										<td><%=asignation.date_end%></td>
+										<td><%=asignation.state.name%></td>
+										<td><%=link_to asignation.user.name, admin_user_path(asignation.user.id)%></td>
+										<td><%="#{asignation.payment} #{@moneda}"%></td>
+										<td><%=asignation.payments.inject(0) {|i,p| p.quantify + i}%><%=@moneda%></td>
+
+
+
+										
+									</tr>
+								<%end%>
+							</tbody>
+						</table>
+					<%end%>
+					
+			</div>
+			<div class="modal-footer">
+				<a class="modal-action modal-close waves-light btn modal-trigger keppler-modal" href="#modal2">Acept</a>
+			</div>
+		</div>
+	<%end%>
+</div>

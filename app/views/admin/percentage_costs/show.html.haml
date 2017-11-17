@@ -1,0 +1,24 @@
+= title(t('keppler.titles.show', model: "Percentage costs"))
+.wrapper
+	.wrapper-body.container
+		.actions
+			/ - if can? :delete, PercentageCost
+			/ 	= link_to admin_percentage_cost_path(@percentage_cost), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+			/ 		= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, PercentageCost
+				= link_to edit_admin_percentage_cost_path(@percentage_cost), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_percentage_costs_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%ul.list
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.id")
+						.display-value.fs-body-1.tc-black-2= @percentage_cost.id.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.order_id")
+						.display-value.fs-body-1.tc-black-2= @percentage_cost.order_id.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.quantify")
+						.display-value.fs-body-1.tc-black-2= "#{@percentage_cost.quantify.to_s.humanize}%"

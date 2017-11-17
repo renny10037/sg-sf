@@ -1,0 +1,19 @@
+.modal{ id: "modal-#{@asignation.id}"}
+	= form_tag admin_asignation_path(@asignation),  method: "PUT" do
+		.modal-header
+			%h4= "Asignation N° - #{@asignation.id}"
+		.modal-content
+			-State.all.each do |state|
+				.radio-button
+					= radio_button_tag "asignation[state_id]", state.id, false, class: "radio-button__input", id: "radio#{state.id}", :type => "radio", :value => "#{state.id}", :checked => @asignation.state.id?()
+					= label_tag "asignation[state_id]", state.name.humanize, class: "radio-button__label", :for => "radio#{state.id}"
+			="Observation"
+			= text_area_tag "asignation[observation]"
+			.modal-footer
+			.actions
+				= link_to t('keppler.actions.cancel'), "", class: "modal-action modal-close waves-effect waves-light btn red", style: "margin-right:10px;"
+				= button_tag t('keppler.actions.assign_state'), :class => "waves-effect waves-light btn", name: '_save'
+
+				
+		
+			

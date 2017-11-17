@@ -1,0 +1,64 @@
+html,body{
+	margin: 0px;
+}
+.brand{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 50px;
+	width: 85px;
+	
+	margin-left: -3px;
+}
+.portada{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 50%;
+	width: 50%;
+	margin-top: 8%;
+}
+.navbar-default{
+	background-color:  #525150 !important;
+	padding: 5px;
+//marron :bf4e11 negro: 525150
+
+}
+.nav-text,.dropdown-toggle{
+	color: #ffffff !important;
+	 font: menu;
+}
+
+.nav-text:hover{
+	background-color: #777777 !important;
+}
+
+
+.dropdown-toggle{
+	
+	text-decoration: none;
+}
+.dropdown-menu{
+	background-color: #525150 !important;
+}
+.panel-heading{
+	//margin-right: -50;
+}
+.dropdown-toggle:focus{
+	background-color: inherit !important;
+
+}
+.table{
+	margin:0%;
+}
+
+
+// .panel-default{
+// 	color: #ffffff !important;
+// 	margin-top: 6.6%;
+// 	background-color: #525150 !important;
+// 	display: block;
+// 	margin-left: auto;
+// 	margin-right: auto	
+// }
+

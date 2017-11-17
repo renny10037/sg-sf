@@ -1,0 +1,34 @@
+<%if @phase != nil%>
+	<table class="responsive-table highlight centered">
+	  <thead>
+	      <tr style="text-transform: uppercase;">
+	      	<!-- <th>Horas</th> -->
+	        <th>PRICE</th>
+	        <th>COST</th>
+	        <th>% PAYMENT</th>
+	        <th>PAYMENT AVAILABLE</th>
+	        <th>DESCRIPTION</th>
+	        
+	        </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	      	<!-- <td><%=%></td> -->
+	        <%if @order.payment_currency == "Bolivar"%>
+	        	<td><%="#{phase.task.price_bolivar} Bs"%></td>
+	        	<td><%="#{phase.task.cost_bolivar} Bs"%></td>
+	        	<td><%="#{@order.percentage_cost.quantify}%"%></td>
+	        	<td><%=cost = ((phase.task.cost_bolivar.to_f)*(@order.percentage_cost.quantify.to_f))/(100)%><%=" Bs"%></td>
+	         <%elsif @order.payment_currency == "Dolar"%>
+
+	         	<td><%="#{phase.task.price_dolar} $"%></td>
+	        	<td><%="#{phase.task.cost_dolar} $"%></td>
+	        	<td><%="#{@order.percentage_cost.quantify}%"%></td>
+	        	<td><%=((phase.task.cost_dolar.to_f)*(@order.percentage_cost.quantify.to_f))/(100)%><%=" $"%></td>
+	        <%end%>
+	        <td><%=phase.description%></td>
+	      
+	      </tr>
+	  </tbody>
+	</table>
+<%end%>	

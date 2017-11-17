@@ -1,0 +1,25 @@
+$('#order').html("<%= j( collection_select(:asignation, :phase_id, @total_activity, :id, :name, { prompt: "Seleccione una Actividad: [Total:#{@total.count} , Dispobiles: #{(@total.count) - (@seleccionadas.count)} seleccionadas: #{(@seleccionadas.count)}]"}, { class: "browser-default"}) )%>")
+
+$(document).ready(function() {
+ 
+    $('#asignation_phase_id').on('change', function() {
+      $.ajax({
+         url: "<%= asignations_phase_path %>",
+         type: "POST",
+         data: { phase_id: $(this).val() }
+         
+      });
+     });
+ 
+  $('select').material_select();
+});
+
+$('#order2').html("<%= j render 'admin/asignations/partials/order', order: @order %>")
+$('#phase').html("<%= j render 'admin/asignations/partials/phase', phase: @phase %>")
+
+
+
+
+
+
+

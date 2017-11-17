@@ -1,0 +1,128 @@
+body{
+    margin:none;
+}
+.logo_crear{
+
+
+    height: 155px;
+    width: 50%;
+    margin-top: 10%;
+    margin-left: -20%;
+    background-image: url('logo_inicio.png') ;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.logo_pc_crear{  
+    height: 450px;
+    width: 100%;
+    margin-top: 10%;
+    margin-left: -20%;
+     background-image: url('logo_pc.png') ;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#caja_sign_in{
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media screen  and (max-width:1200px) { 
+   .logo_crear{
+
+
+    height: 155px;
+    width: 40%;
+    margin-top: 10%;
+    margin-left: 0px;
+   
+}
+}
+
+
+
+
+
+
+
+
+// #user_address{
+//     display: block;
+//     width: 200%;
+// }
+
+
+.button{
+        color: #fff;
+    background-color: #337ab7;
+    border-color: #204d74;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 102px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+}
+.button:hover{
+    color: none !important;
+   background-color: none !important;
+    border-color: none !important;
+}
+#fecha{
+    margin-top: 2px;
+}
+
+h2{
+   
+}
+@media only screen and (max-width: 372px) {  
+    .text{
+         width: 130%;
+    }
+  
+} 
+#chekeador{
+
+    select, ul { 
+        height: 50px; 
+        overflow: auto; 
+        width: 100%; 
+        border: 1px solid #9a9a9a;
+        display: block;
+        font-size: 14px;
+        line-height: 1.52857143;
+        color: #555555;
+        background-image: none;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-top: 10px;
+                
+
+    }
+   ul { list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+    overflow-x: hidden; 
+    }
+   li { margin: 0;
+    padding: 0; 
+    }
+  
+   label:hover {
+    background-color: Highlight; 
+    color: HighlightText; 
+    }
+}

@@ -1,0 +1,22 @@
+%tr{ id: "row-#{percentage_cost.id}" }
+	/ - if can? :destroy_multiple, PercentageCost
+	/ 	%td.item-check{style:"width: 10%"}
+	/ 		= link_to "", admin_percentage_cost_path(percentage_cost), remote: true, class: "show-row"
+	/ 		%input{ type:"checkbox", class: "filled-in", id: "checkbox-#{percentage_cost.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{percentage_cost.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
+	/ 		%label{ for: "checkbox-#{percentage_cost.id}" }
+	%td{style:"width: 1%"}
+	%td{style:"width: 30%"}
+		= link_to "", admin_percentage_cost_path(percentage_cost, search: @query), remote: true, class: "show-row"
+		%span
+			= percentage_cost.order_id
+	%td{style:"width: 30%"}
+		= link_to "", admin_percentage_cost_path(percentage_cost, search: @query), remote: true, class: "show-row"
+		%span
+			= "#{percentage_cost.quantify} %"
+
+	/ %td{style:"width: 5%"}
+	/ 		= link_to admin_percentage_cost_clone_path(percentage_cost), class: "btn-floating waves-effect btn-flat" do
+	/ 			= material_icon.md_24.content_copy.css_class("md-dark")
+	%td{style:"width: 5%"}
+		= link_to admin_percentage_cost_path(percentage_cost), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.more_horiz.css_class("md-dark")

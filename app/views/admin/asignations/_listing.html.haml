@@ -1,0 +1,81 @@
+%tr{ id: "row-#{asignation.id}" }
+	/ - if can? :destroy_multiple, Asignation
+	/ 	%td.item-check{style:"width: 10%"}
+	/ 		= link_to "", admin_asignation_path(asignation), remote: true, class: "show-row"
+	/ 		%input{ type:"checkbox", class: "filled-in", id: "checkbox-#{asignation.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{asignation.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
+	/ 		%label{ for: "checkbox-#{asignation.id}" }
+	%td{style:"width: 3%"}
+	%td{style:"width: 3%"}
+		= link_to "", admin_asignation_path(asignation, search: @query), remote: true, class: "show-row"
+		%span
+			= asignation.id
+	%td{style:"width: 3%"}
+		= link_to "", admin_asignation_path(asignation, search: @query), remote: true, class: "show-row"
+		%span
+			= asignation.order_id
+	%td{style:"width: 10%"}
+		= link_to "", admin_asignation_path(asignation, search: @query), remote: true, class: "show-row"
+		%span
+			= asignation.date_start
+	%td{style:"width: 10%"}
+		= link_to "", admin_asignation_path(asignation, search: @query), remote: true, class: "show-row"
+		%span
+			=asignation.date_end
+			
+	%td{style:"width: 15%"}
+		= link_to "", admin_asignation_path(asignation, search: @query), remote: true, class: "show-row"
+		%span
+			-date_server = Date.parse(Time.now.strftime("%d/%m/%Y"))
+			-date_end = (Date.parse(asignation.date_end.strftime("%d/%m/%Y")))
+			-total_dias = (date_end - date_server).to_i
+			%strong
+				-if (total_dias > 5)  
+					.color_uno
+						="Remaining days:(#{total_dias})"
+
+				-elsif (total_dias > 0) and (total_dias < 6) 
+					.color_dos
+						="Remaining days:(#{total_dias})"
+
+				-elsif (total_dias == 0)
+					.color_tres
+						="today is the deadline"
+					
+				-elsif (total_dias < 0)
+					.color_cuatro
+						="date ended" 
+	%td{style:"width: 12%"}
+		= link_to "", admin_asignation_path(asignation, search: @query), remote: true, class: "show-row"
+		%span
+			%strong
+				-if (asignation.state.id == 1)  
+					.color_uno
+						="State:#{asignation.state.name}"
+
+				-elsif (asignation.state.id == 2)  
+					.color_dos
+						="State:#{asignation.state.name}"
+
+				-elsif (asignation.state.id == 3)  
+					.color_tres
+						="State:#{asignation.state.name}"
+					
+				-elsif (asignation.state.id == 4)  
+					.color_cuatro
+						="State:#{asignation.state.name}"
+				-else (asignation.state.id > 4)  
+					="State:#{asignation.state.name}"
+
+
+
+	%td{style:"width: 6%"}
+		= link_to admin_asignation_history_path(asignation), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.history.css_class("md-dark")
+
+	%td{style:"width: 6%"}
+		= link_to admin_asignation_inspect_path(asignation), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.search.css_class("md-dark")
+
+	%td{style:"width: 6%"}
+		= link_to admin_asignation_path(asignation), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.more_horiz.css_class("md-dark")

@@ -1,0 +1,127 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			= link_to admin_asignations_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.wrapper-inputs
+			.card
+				.card-content
+					= simple_form_for [:admin, @asignation] do |f|
+						.row
+							.col.s7{style:"padding: 0px"}
+								= f.input :order_id, collection: @orders, label_method: :id, value_method: :id, label: false, include_blank:'Select Order', input_html: { class: "browser-default",  style:"margin-bottom: 5px; padding: 0px;" }
+							.col.s5.right{style:"padding: 0px"}
+								.div{class:"form-actions right" , style:"margin-top: 18px;"} 
+									%a.btn.modal-trigger.keppler-modal{:href => "#modal1"} Description
+									%a.btn.modal-trigger.keppler-modal{:href => "#modal2"} Asignations
+							#order2 
+							#modal1.modal.modal
+								.modal.modal-fixed-footer
+								%h4 Estimado Usuario:
+								%p select an order of service
+								.modal-footer
+								%a.modal-action.modal-close.waves-light.btn.modal-trigger.keppler-modal Acept
+							#modal2.modal.bottom-sheet
+								.modal-content
+								%h4 Estimado Usuario:
+								%p select an order of service
+								.modal-footerkeppler-modal
+								%a.modal-action.modal-close.waves-light.btn.modal-trigger.keppler-modal Acept
+							#order{:style => "margin-bottom: 5px;", class: "col input-field optional s12 select"}
+							#phase
+							= f.input :date_start, as: :string, input_html: {class: "datepicker"}
+							= f.input :date_end, as: :string, input_html: {class: "datepicker"}
+							= f.input :payment
+							.col.s7{style:"padding: 0px"}
+							-if (controller_name == "asignations" and action_name == "new") or (controller_name =="asignations" and action_name == "create")
+								= f.input :user_id, collection: @employee, label: false, include_blank:'Select Employee', input_html: { class: "browser-default" }
+									
+								.col.s5.right{style:"padding: 0px"}
+									.div{class:"form-actions right" , style:"margin-top: 18px;"} 
+										%a.btn.modal-trigger.keppler-modal{:href => "#modal3"} Information
+										%a.btn.modal-trigger.keppler-modal{:href => "#modal4"} Asignations
+								#user
+								#modal3.modal.modal
+									.modal-content.modal-fixed-footer
+									%h4 Estimado Usuario:
+									%p select an employee
+									.modal-footer
+									%a.modal-action.modal-close.waves-light.btn.modal-trigger.keppler-modal Acept
+								#modal4.modal.bottom-sheet
+									.modal-content
+									%h4 Estimado Usuario:
+									%p select an employee
+									.modal-footerkeppler-modal
+									%a.modal-action.modal-close.waves-light.btn.modal-trigger.keppler-modal Acept
+								
+							= f.input :description, input_html: {class: "materialize-textarea"}
+			
+							.form-actions.right
+								= f.button :submit, t("keppler.actions.save"), name: '_save'
+								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'							
+:javascript
+	
+		
+		$(document).ready(function() {
+		$('#asignation_order_id').on('click', function() {
+			$.ajax({
+				 url: "#{asignations_order_path}",
+				 type: "POST",
+				 data: { order_id: $(this).val() }
+			});
+		 });
+		 $('#asignation_user_id').on('change', function() {
+			$.ajax({
+				 url: "#{asignations_user_path}",
+				 type: "POST",
+				 data: { user_id: $(this).val() }
+			});
+			});
+
+	 
+	 	$('select').material_select();
+	 	$('.datepicker').pickadate ({
+	 	   min: new Date(),
+	 	   selectMonths: true,
+	 	   yearSelector: false,
+	 	   hiddenName: true,
+	 	   selectYears: 1,
+	 	   editable: false,
+	 	   firstDay: 1,
+	 	   format: 'dd/mm/yyyy',
+	 	   formatSubmit: 'dd-mm-yyyy',
+	 		
+	    });
+
+	  // Validacion de fecha comienzo real vs fecha de finalizacion real
+	 var inicio = $('#asignation_date_start').pickadate(),
+	 inicio_picker = inicio.pickadate('picker')
+	 var final = $('#asignation_date_end').pickadate(),
+	 final_picker = final.pickadate('picker')
+
+	 // Check if there’s a “from” or “to” date to start with.
+	 if (inicio_picker.get('value')) {
+	  final_picker.set('min', inicio_picker.get('select'))
+	 }
+	 if (final_picker.get('value')) {
+	  inicio_picker.set('max', final_picker.get('select'))
+	 }
+	 // When something is selected, update the “from” and “to” limits.
+	 inicio_picker.on('set', function(event) {
+	  if (event.select) {
+	   final_picker.set('min', inicio_picker.get('select'))
+	  } else if ('clear' in event) {
+	   final_picker.set('min', false)
+	  }
+	 })
+	 final_picker.on('set', function(event) {
+	  if (event.select) {
+	   inicio_picker.set('max', final_picker.get('select'))
+	  } else if ('clear' in event) {
+	   inicio_picker.set('max', false)
+	  }
+	 })
+
+
+	 });
+

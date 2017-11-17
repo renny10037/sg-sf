@@ -1,0 +1,77 @@
+<%=render "app/layouts/navegation_navbar"%>
+<div class="container">
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="widget-box" id="payment">
+        <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG1"><span class="icon"><i class="icon-chevron-down"></i></span>
+           <h5>ASIGNATIONS</h5>
+         </div>
+         <div class="widget-content nopadding collapse in" id="collapseG1">
+           <ul class="recent-posts">
+            <%@notifications.sort.reverse.each do |notification|%>
+              <%if notification.user.to_i == current_user.id.to_i %>
+                <%if (notification.description == "Created Asignation")%>
+                  <li>
+                    <div class="user-thumb"> 
+                        <i class="fa fa-plus fa-3x" aria-hidden="true" style="color: #273138 !important"></i> 
+                    </div>
+                    <div class="article-post"> <span class="user-info"><%="Estimado #{notification.asignation}"%>  </span>
+                       <p><%="#{notification.description} N:#{notification.asignation},State:#{notification.state}, date:#{notification.created_at}"%></p>
+                    </div>
+                  </li>
+                <%elsif (notification.description == "Updated Asignation")%>
+                    <li>
+                    <div class="user-thumb">
+                        <i class="fa fa-pencil fa-3x" aria-hidden="true" style="color:#273138 !important"></i>
+                    </div>
+                    <div class="article-post"> <span class="user-info"><%="Estimado #{notification.asignation}"%>  </span>
+                       <p><%="#{notification.description} N:#{notification.asignation},State:#{notification.state}, date:#{notification.created_at}"%></p>
+                    </div>
+              <%end%>
+              <%end%>
+            <%end%>
+           </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="span6">
+      <div class="widget-box" id="payment">
+        <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2"><span class="icon"><i class="icon-chevron-down"></i></span>
+           <h5>Payments</h5>
+         </div>
+         <div class="widget-content nopadding collapse in" id="collapseG2">
+           <ul class="recent-posts">
+            <%@notifications.sort.reverse.each do |notification|%>
+              <%if notification.user.to_i == current_user.id.to_i %>
+                <%if (notification.description == "Created Payment")%>
+                  <li>
+                    <div class="user-thumb"> 
+                        <i class="fa fa-plus fa-3x" aria-hidden="true" style="color: #273138 !important"></i> 
+                    </div>
+                    <div class="article-post"> <span class="user-info"><%="Estimado #{notification.asignation}"%>  </span>
+                       <p><%="#{notification.description},N:#{notification.payment}, N° Asignation #{notification.asignation},State:#{notification.state},quantify#{notification.quantify_payment} date:#{notification.created_at}"%> </a> </p>
+                    </div>
+                  </li>
+                <%elsif (notification.description == "Updated Payment")%>
+                    <li>
+                    <div class="user-thumb">
+                        <i class="fa fa-pencil fa-3x" aria-hidden="true" style="color:#273138 !important"></i>
+                    </div>
+                    <div class="article-post"> <span class="user-info"><%="Estimado #{notification.asignation}"%>  </span>
+                       <p><%="#{notification.description} N:#{notification.asignation},State:#{notification.state}, date:#{notification.created_at}"%> </a> </p>
+                    </div>
+              <%end%>
+              <%end%>
+            <%end%>
+           </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ <!--  </div>
+</div>
+</div> -->

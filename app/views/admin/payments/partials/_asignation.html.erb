@@ -1,0 +1,35 @@
+<div id="payment-asignation" style="height: 20px; margin-top: 10px; margin-bottom: 70px; padding: 0px !important" class="input-field col s12">
+	<strong>N° Order:</strong> <%=asignation.order.id%><br>
+	<strong>project:</strong> <%=asignation.order.project.name%><br>
+	<strong>Client:</strong> <%=asignation.order.name_client%><br>
+	<strong>Identification:</strong> <%=asignation.order.identification_client%>
+</div>
+	<table class="responsive-table highlight centered">
+		<thead>
+			<tr>
+				<th>N: ASIG.</th>
+				<th>EMPLOYEE</th>
+				<th>ACTIVITY</th>
+				<th>DATE START</th>
+				<th>DATE END</th>
+				<th>PAYMENT</th>
+				<th>P. CURRENCY</th>
+				<th>Q. PAYMENT</th>
+					
+			</tr>
+		</thead>
+		<tbody>
+			<tr> 
+				<td><%=link_to asignation.id, admin_asignation_path(asignation.id)%></td>
+				<td><%=link_to asignation.user.name, admin_user_path(asignation.user.id)%></td>
+				<td><%=asignation.phase.name%></td>
+				<td><%=asignation.date_start%></td>
+				<td><%=asignation.date_end%></td>
+				<td><%=asignation.payment%></td>
+				<td><%=asignation.order.payment_currency%></td>
+				<td><%=asignation.payments.inject(0) {|i,p| p.quantify + i}%></td>
+		
+		  </tr>
+		</tbody>
+	</table>
+</div>

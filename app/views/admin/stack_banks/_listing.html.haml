@@ -1,0 +1,13 @@
+%tr{ id: "row-#{stack_bank.id}" }
+	%td{style:"width: 1%"}
+	%td{style:"width: 30%"}
+		= link_to "", admin_stack_bank_path(stack_bank, search: @query), remote: true, class: "show-row"
+		%span
+			= stack_bank.name
+	%td{style:"width: 30%"}
+		= link_to "", admin_stack_bank_path(stack_bank, search: @query), remote: true, class: "show-row"
+		%span
+			= stack_bank.cod
+	%td{style:"width: 5%"}
+		= link_to admin_stack_bank_path(stack_bank), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.more_horiz.css_class("md-dark")

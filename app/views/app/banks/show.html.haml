@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Stock bank:
+  = @bank.stock_bank_id
+%p
+  %b Stock bank:
+  = @bank.stock_bank_id
+%p
+  %b Stock bank:
+  = @bank.stock_bank.name
+%p
+  %b Stock bank:
+  = @bank.stock_bank_id
+%p
+  %b Type account:
+  = @bank.type_account
+%p
+  %b N account:
+  = @bank.n_account
+%p
+  %b Email paypal:
+  = @bank.email_paypal
+%p
+  %b User:
+  = @bank.user_id
+
+= link_to 'Edit', edit_bank_path(@bank)
+\|
+= link_to 'Back', banks_path

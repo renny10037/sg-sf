@@ -1,0 +1,60 @@
+<%=render 'app/layouts/navegation_users'%>
+<div class="col-lg-6 col-xs-12" id="section-home2">
+  <div id="home" class="hero hero--scotch2 hero--scotch2 gradient--sunset2">
+    <div id="mask-home-right2">
+      <div id="card-login">
+        <div id="mask-card-login">
+          <div id="title-card-login">
+          <link href="https://fonts.googleapis.com/css?family=Roboto|Shadows+Into+Light+Two" rel="stylesheet">
+            <span id="title-slice">autentication</span>             
+          </div>
+          <div id="form-card-login">
+            <div id="item-card-login2">
+              <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %> 
+                  <div class="section-item">
+                    <span class="title-item">Email</span>
+                    <%= f.input :email, :autofocus => true,class: "validate #{'invalid' if flash[:alert]}", :label => false ,input_html: { class: "input-sesion form-control" }%>
+                    
+                  </div>
+                  <div class="section-item">
+                    <span class="title-item">Password</span
+                    <%= f.input :password,  :autofocus => true, class: "validate #{'invalid' if flash[:alert]}", :label => false ,input_html: { class: "input-sesion form-control" } %>
+                   
+                  
+                  <div class="devise-errors center-align">
+                    <% flash.each do |name, msg| %>
+                      <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+                    <% end %>
+                  </div>
+                  <% if devise_mapping.recoverable? %>
+                    <%= link_to new_password_path(resource_name), class: "recoverable " do %>
+                       <%= t("devise.sessions.¿forgot_password?") %>
+                       <%=link_to "Sign up",new_user_registration_path, class: "recoverable "%>
+                    <% end %>
+                  <% end %>              
+                          <%= f.submit t("devise.sessions.log_in"), :class => 'btn btn-lg btn-sesion center-block' %>
+                  <% end %>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+a:hover, a:focus {
+  color: black !important; 
+  text-decoration: underline;
+}
+
+#item-card-login2 {
+    width: 100%;
+    height: 100%;
+    padding-top: 8px;
+    position: relative;
+}
+
+</style>

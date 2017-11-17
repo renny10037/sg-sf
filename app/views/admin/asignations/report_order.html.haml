@@ -1,0 +1,118 @@
+.wrapper
+	.wrapper-body.container.container-md
+		.actions
+			= link_to admin_asignations_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%ul.list
+					%li.list-row
+						%table.responsive-table.highlight.centered
+							%thead
+								%tr
+									%th N
+									%th PROJECT
+									%th CLIENT
+									%th IDENTIFICATION
+									%th DATE START
+									%th DATE END
+									%th REMAINING
+									%th ACT COMPLET/TOTAL
+									%th PAYM COMPLET/ TOTAL
+
+							%tbody
+
+								-@orders.sort.reverse.each do |order|
+									-if order.asignations != []
+										%tr
+											%td
+												=order.id
+											%td
+												=order.project.name
+											%td
+												=order.name_client
+											%td
+												=order.identification_client
+											%td
+												=order.date_start_planned
+											%td
+												=order.date_end_planned
+											%td
+												-date_server = Date.parse(Time.now.strftime("%d/%m/%Y"))
+												-date_end = (Date.parse(order.date_end_planned.strftime("%d/%m/%Y")))
+												-total_dias = (date_end - date_server).to_i
+												%strong
+													-if (total_dias > 5)  
+														.color_uno
+															="Days:(#{total_dias})"
+
+													-elsif (total_dias > 0) and (total_dias < 6) 
+														.color_dos
+															="Days:(#{total_dias})"
+
+													-elsif (total_dias == 0)
+														.color_tres
+															="Today is the deadline"
+														
+													-elsif (total_dias < 0)
+														.color_cuatro
+															="Date ended" 
+											%td
+												-total_activity = 0
+												-activity = 0
+												-total_payment = 0
+												-payment = 0
+												-order.asignations.each do |asignation|
+													-total_activity += 1
+													-total_payment += 1
+													-if(asignation.state.id == 4)
+														-activity += 1
+													-elsif(asignation.state.id == 3)
+														-total_activity -= 1
+														-total_payment -= 1
+														
+
+													-if asignation.payments.inject(0) {|i,p| p.quantify + i} == asignation.payment
+														-if(asignation.state.id == 3)
+															-payment -= 1
+															
+
+														-payment += 1
+
+													-if asignation.user_id =="2"
+														-payment = payment -1
+														-total_payment = total_payment -1
+											
+
+												%strong
+
+													%span
+														-if (activity == 0) 
+															.color_tres
+																="(#{activity} / #{total_activity})"
+														-elsif (activity > 0) and (activity < total_activity)
+															.color_dos	
+																="(#{activity} / #{total_activity})"
+														-elsif (activity == total_activity)
+															.color_uno
+																="(#{activity} / #{total_activity})"
+											
+											%td
+												%strong
+													%span
+														-if (payment == total_payment)
+															.color_uno
+																="(#{payment} / #{total_payment}) "
+
+														-elsif (payment ==  0 or (payment > total_payment))
+															.color_tres
+																="(#{payment} / #{total_payment}) "
+														-elsif (payment > 0) and (payment < total_payment) 
+															.color_dos	
+																="(#{payment} / #{total_payment}) "
+									
+														
+
+
+
+											

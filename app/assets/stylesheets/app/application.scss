@@ -1,0 +1,51 @@
+//= require_self
+
+// Plugins
+@import "bourbon";
+@import 'plugins/bootstrap_override';
+@import 'plugins/font_awesome';
+@import 'plugins/npogress';
+
+// Utils
+@import 'utils/variables';
+@import 'utils/mixins';
+
+// Base
+@import 'base/base_project';
+
+// Layout
+@import 'layout/container';
+@import 'layout/header';
+@import 'layout/footer';
+
+// Components
+@import 'components/navbar';
+@import 'components/buttons';
+@import 'components/inputs';
+
+// Pages
+@import 'pages/frontend';
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+//personalizados
+@import 'pages/index';
+@import 'pages/plantilla';
+@import 'pages/registrarse';
+@import 'pages/sesion';
+@import 'pages/new';
+@import 'pages/styles';
+@import 'pages/table';
+@import 'pages/bootstrap';
+@import 'pages/bootstrap-responsive.min';
+@import 'pages/font-awesome';
+@import 'pages/matrix-media';
+@import 'pages/matrix-style';
+@import 'pages/stacktable';
+
+
+//datepicker
+// import bootstrap-sprockets before bootstrap if using bootstrap >= 3.2
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';

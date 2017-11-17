@@ -1,0 +1,230 @@
+<div class="wrapper">
+  <div class="wrapper-body container container-md">
+    <div class="actions">
+      <%= link_to admin_asignations_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do %>
+        <%= material_icon.md_18.arrow_back.css_class("md-dark") %>
+      <% end %>
+      <%= link_to request.original_url+'.pdf', class: "btn-floating right btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => "Print" do %>
+        <%= material_icon.md_18.description.css_class("md-dark") %>
+      <% end %>
+    </div>
+    <div class="wrapper-inputs">
+      <div class="card">
+        <div class="card-content">
+          <div class="row">
+
+
+            <%= simple_form_for (@asignation),url: :create_report_admin_asignations, method: :post do |f| %>
+                
+                <%=f.association :state, include_blank: 'State', label: false ,input_html: {class: "browser-default", style: "margin-botton:px" } %>
+                <%=f.input :user_id, collection: @employee, include_blank: 'Select Employee', label: false ,input_html: {class: "browser-default", style: "margin-botton:px" }%>
+                <%=f.input :payment, collection: @quant_payment, include_blank: 'Select Payment', label: false ,input_html: {class: "browser-default", style: "margin-botton:px" }%>  
+                <%=f.input :date_start, as: :string, input_html: {class: "datepicker" , style: "margin-botton:px" }%>
+                  <%=f.input :date_end, as: :string, input_html: {class: "datepicker" , style: "margin-botton:px" }%>
+                 <div class="form-actions right">
+                   <%=f.button :submit, t("keppler.actions.search"), name: '_save' %>
+                 </div>
+                 <div class="input-field col s12 ">
+                <%if $bandera == "1"%>
+                  <%if ($parametro.date_start.to_s == "") or ($parametro.date_end.to_s == "")%>
+                     <%$date_start = $parametro.date_start = "11/11/1111"%></br>
+                     <%$date_end = $parametro.date_end = "11/11/1111"%></br>
+                  <%end%>
+                  <table class="responsive-table highlight centered">
+                      <thead>
+                        <tr style="text-transform: uppercase;">
+                        <th>N°</th>
+                         <th>N° ORDER</th>
+                         <th>CLIENT</th>
+                          <th>N° Asig.</th>
+                          <th>Activity</th>
+                          <th>EMPLOYEE</th>
+                          <th>Payment</th>
+                          <th>Total Paid</th>
+                          <th>State</th>
+                        </tr>
+                      </thead>
+                      <%num = 0%>
+                <%@asignations.each do |asignation|%>
+                <%num += 1%>
+                  <%if $parametro.user_id == asignation.user_id%>
+                    <%if $parametro.state_id == asignation.state_id%>
+                      <%if $parametro.payment == 1%>
+                        <%if asignation.payment == asignation.payments.inject(0) {|i,p| p.quantify + i}%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                        <%end%>
+                      <%elsif $parametro.payment == 0%>
+                        <%if asignation.payment != asignation.payments.inject(0) {|i,p| p.quantify + i}%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                        <%end%>
+                      <%elsif $parametro.payment == nil%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                      <%end%>
+                      <%elsif $parametro.state == nil%>
+                        <%if $parametro.payment == 1%>
+                          <%if asignation.payment == asignation.payments.inject(0) {|i,p| p.quantify + i}%>
+                            <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                                <%a = asignation%>
+                            <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                                <%a = asignation%>
+                            <%end%>
+                          <%end%>
+                        <%elsif $parametro.payment == 0%>
+                          <%if asignation.payment != asignation.payments.inject(0) {|i,p| p.quantify + i}%>
+                            <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                                <%a = asignation%>
+                            <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                                <%a = asignation%>
+                            <%end%>
+                            <%end%>
+                        <%elsif $parametro.payment == nil%>
+                            <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                                <%a = asignation%>
+                            <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                                <%a = asignation%>
+                            <%end%>
+                        <%end%>
+                  <%end%>
+                  <%elsif $parametro.user == nil%>
+                    <%if $parametro.state_id == asignation.state_id%>
+                      <%if $parametro.payment == 1%>
+                        <%if asignation.payment == asignation.payments.inject(0) {|i,p| p.quantify + i}%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                        <%end%>
+                      <%elsif $parametro.payment == 0%>
+                        <%if asignation.payment != asignation.payments.inject(0) {|i,p| p.quantify + i}%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                        <%end%>
+                      <%elsif $parametro.payment == nil%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                      <%end%>
+                    <%elsif $parametro.state == nil%>
+                      <%if $parametro.payment == 1%>
+                        <%if asignation.payment == asignation.payments.inject(0) {|i,p| p.quantify + i}%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                        <%end%>
+                      <%elsif $parametro.payment == 0%>
+                        <%if asignation.payment != asignation.payments.inject(0) {|i,p| p.quantify + i}%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                        <%end%>
+                      <%elsif $parametro.payment == nil%>
+                          <%if (Date.parse (asignation.date_start.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start.strftime("%d-%m-%Y"))) and (Date.parse(asignation.date_end.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end.strftime("%d-%m-%Y")))%>
+                              <%a = asignation%>
+                          <%elsif ($parametro.date_start.to_s == $date_start) or ($parametro.date_end.to_s == $date_end)%>
+                              <%a = asignation%>
+                          <%end%>
+                      <%end%>
+                    <%end%>
+                  <%end%> 
+                  <%unless a == nil%>
+                    <tbody>
+                      <tr style="text-transform: capitalize;">
+                        <td><%=num%></td>
+                        <td><%=a.order.id%></td>
+                        <td><%=a.order.name_client%></td>
+                        <td><%=link_to a.id, admin_asignation_path(a.id)%></td>
+                        <%if a.order.payment_currency == "Bolivar"%>
+                          <%@moneda = "Bs"%>
+                        <%elsif a.order.payment_currency == "Dolar"%>
+                          <%@moneda = "$"%>
+                        <%end%>
+                        <td><%=a.phase.name%></td>
+                        <td><%=link_to "#{a.user.name} #{a.user.last_name}", admin_user_path(a.user.id)%></td>
+                        <td><%="#{a.payment} #{@moneda}"%></td>
+                        <td><%=a.payments.inject(0) {|i,p| p.quantify + i}%> <%=@moneda%></td>
+                        <td><%=a.state.name%></td>
+                      </tr>
+                    </tbody>
+                  <%end%>
+                <%end%>
+                </table>
+              </div>
+
+
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%end%>
+<script>
+    $(document).ready(function() {
+    
+   
+    $('select').material_select();
+    $('.datepicker').pickadate ({
+       selectMonths: true,
+       yearSelector: false,
+       hiddenName: true,
+       selectYears: 1,
+       editable: false,
+       firstDay: 1,
+       format: 'dd/mm/yyyy',
+       formatSubmit: 'yyyy-mm-dd',
+      
+      });
+
+    // Validacion de fecha comienzo real vs fecha de finalizacion real
+   var inicio = $('#asignation_date_start').pickadate(),
+   inicio_picker = inicio.pickadate('picker')
+   var final = $('#asignation_date_end').pickadate(),
+   final_picker = final.pickadate('picker')
+
+   // Check if there’s a “from” or “to” date to start with.
+   if (inicio_picker.get('value')) {
+    final_picker.set('min', inicio_picker.get('select'))
+   }
+   if (final_picker.get('value')) {
+    inicio_picker.set('max', final_picker.get('select'))
+   }
+   // When something is selected, update the “from” and “to” limits.
+   inicio_picker.on('set', function(event) {
+    if (event.select) {
+     final_picker.set('min', inicio_picker.get('select'))
+    } else if ('clear' in event) {
+     final_picker.set('min', false)
+    }
+   })
+   final_picker.on('set', function(event) {
+    if (event.select) {
+     inicio_picker.set('max', final_picker.get('select'))
+    } else if ('clear' in event) {
+     inicio_picker.set('max', false)
+    }
+   })
+
+
+   });
+</script>

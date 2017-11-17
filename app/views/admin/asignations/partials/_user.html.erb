@@ -1,0 +1,91 @@
+<div id="user">
+
+  <href="#modal3"></a>
+  <!-- Modal Structure -->
+  <div id="modal3" class="modal" style="padding: 20px;">
+    <div class="modal-content">
+      <span class="title-order">Employee: <%=user.name%></span>
+        <%if user.id != 2%>
+          <%if user.bank == nil%>
+              <p class="bank">BANK:<div class="color_tres"></p> No ha registado el banco</p></div>
+          <%else%>
+            <%if user.bank.stack_bank == nil%>
+              <p class="bank">BANK:<div class="color_tres"></p> No posee Banco Nacional Venezolano</p></div>
+            <%else%>
+              <p class="bank">BANK: </p> <%=user.bank.stack_bank.name%>
+            <%end%>
+
+            <%if user.bank.email_paypal == nil%>
+              <p class="bank">PAYPAL:<div class="color_tres"></p> No posee cuenta en PAYPAL</p></div>
+            <%else%>
+              <p class="bank">PAYPAL: </p> <%=user.bank.email_paypal%>
+            <%end%>
+          <%end%>
+
+          <%if user.experience == nil%> 
+            <p class="bank">Experience: <div class="color_tres"></p> No Ha registrado la  experiencia</div>
+          <%else%>
+            <p class="bank">EXPERIENCE: </p> <%=user.experience.description%>
+          <%end%>
+        <%end%>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-light btn modal-trigger" href="#modal3">Acept</a>
+    </div>
+  </div>
+
+
+
+
+    <href="#modal4"></a>
+    <!-- Modal Structure -->
+    <div id="modal4" class="modal bottom-sheet" style="padding: 20px;>
+      <div class="modal-content">
+        <span class="title-order">EMPLOYEE: <%=user.name%></span>
+          <%if user.asignations == []%>
+            <%="not currently own assignments"%>
+            <%else%>
+            <table class="responsive-table highlight centered">
+              <thead>
+                  <tr>
+                    <th>CANT ASIG.</th>
+                    <th>N° ASIG.</th>
+                    <th>N° ORDER </th>
+                    <th>ACTIVITY</th>
+                    <th>PROJECT</th>
+                    <th>CLIENT</th>
+                    <th>STATE</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                <%a = 0%>
+                <%user.asignations.each do |asignation|%>
+                  <tr>
+                    <%if asignation.state.id.eql? 1 and asignation.state.id.eql? 2 %>
+                      <td><%=a = a+1%></td>
+                      <td><%= link_to asignation.id, admin_asignation_path(asignation.id)%></td>
+                      <td><%=asignation.order.id%></td>
+                      <td><%=asignation.phase.name%></td>
+                      <td><%=asignation.order.project.name%></td>
+                       <td><%=asignation.order.name_client%></td>
+                      <td><%=asignation.state.name%></td>
+                    <%end%>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+          <%end%>
+           <div class="modal-footer">
+        <a class="modal-action modal-close waves-light btn modal-trigger" href="#modal4">Acept</a>
+      </div>
+      </div>
+     
+    </div>
+</div>
+<style>
+  .bank{
+    font-size: 16px;
+    font-weight: bolder;
+  }
+</style>
